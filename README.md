@@ -1,40 +1,94 @@
-# Saving WEEE Waste MacBooks (and a MacMini) from landfill 
+# Saving WEEE Waste MacBooks (and a Mac Mini) from Landfill
 
-I have a YouTube channel where I try to save aging MacBooks from landfill. Mostly this is trouble-free, I am given or sometimes buy an old Apple computer that still looks great but has aged out and Apple are no longer supporting it. I don't want a house full of old Macs (old as in not old enough to be vintage, but old enough to be useless in Apple's eyes), so I usually have an idea for who will receive this item when I'm finished, and as a result I usually either install a Linux distribution or if the hardware is a bit newer and/or the intended recipient is a little less likely to thrive in the Linux world, then I use the fantastic **Open Core Legacy Patcher** to install one of the newer MacOS versions that are tricked into thinking they can run on older hardware. In most cases, I would recommend OCLP to anyone else doing this sort of thing as the tool has matured well and in most cases, makes it very easy to get a new (or the newest) version of MacOS running on an older Mac. 
+I run a [YouTube channel](https://www.youtube.com/@WhatTheFlash-cx6ox) where I try to rescue aging MacBooks from landfill. Most of the time, this is a smooth process. I either receive or purchase an old Apple computer that still looks great but has aged out of Apple's support cycle. I don’t want a house full of old Macs (not old enough to be vintage, but old enough to be useless in Apple’s eyes), so I usually have an idea of who will receive the device when I’m finished. 
 
-Find out more about **OCLP** here CLICKY
+Depending on the recipient, I either install a Linux distribution or, if the hardware is a bit newer and/or the intended user is less likely to thrive in the Linux world, I use the fantastic **Open Core Legacy Patcher** (**OCLP**) to install a newer MacOS version. **OCLP** tricks older hardware into running MacOS versions that Apple no longer officially supports. This tool has matured well and makes it relatively easy to install newer MacOS versions on older Macs.
 
-# Mobile Device Manager
+Find out more about **OCLP** [here](https://dortania.github.io/OpenCore-Legacy-Patcher/).
 
-Sometimes, I come across nice looking Macs (so far a couple of portables and even a MacMini once) that have been enrolled in something called **Mobile Device Management**. This is a way for a company to control what you install on a computer, or ensure you use a complicated password, disk encryption, or any other number of things. It should also be noted that **MDM**s are used to secure company assets, there is always a chance that the device has been stolen or lost and the **MDM** can be used to remotely lock the device and even remotely wipe the device. This might not sound too impressive, remote wipe is something available to consumers with laptops signed into iCloud, but this wasn't always the case. 
+## Mobile Device Manager
 
-## Reasons to remove and MDM
+Sometimes, I come across nice-looking Macs (so far, a couple of portables and even a Mac Mini) that have been enrolled in **Mobile Device Management** (**MDM**). This allows companies to control what users install, enforce security policies (e.g., password complexity, disk encryption), and manage remote device access. **MDM** can also be used to remotely lock or wipe a device, which is particularly useful for lost or stolen company assets.
 
-I'm making it clear that this is not a guide for getting around stolen MacBooks, further to this, I would recommend you also sign into iCloud on your MacBooks using either a personal or work iCloud account, this will allow you to enable an **Activation Lock** which cannot be bypassed at all, a Laptop in Activation Lock mode is bricked until the Activation Lock is removed by rightful owner. 
+It's important to distinguish **MDM** from **Activation Lock** or a **T2 Locked** device. Click [here](unlocking-a-t2-mac.md) to learn more about bypassing **T2 Locked** devices.
 
-It should also be noted that even if you remove MDM, it is not a permanent fix, the next big OS update or you manually restoring the device will likely trigger the MDM enrollment again, this is by design. 
+## Reasons to Remove an MDM
 
-However, there are genuine reasons why you might want to bypass the MDM. 
+Let me be absolutely clear, this is **not** a guide for bypassing security on stolen MacBooks. If that’s what you’re looking for, you’re in the wrong place. 
 
-1. Preventing WEEE Waste
-2. Making life a bit harder for your companies IT Manager
-3. To fix something on the laptop (sometimes even the IT staff need to bypass MDM without removing it from enrollment)
+For legitimate users, however, there are valid reasons to bypass **MDM**, such as:
 
-# What about a T2 locked device? 
+1. Preventing WEEE Waste.
+2. Regaining control over a personally owned or retired work device.
+3. Troubleshooting issues (even IT staff sometimes need to bypass **MDM** without permanently removing enrollment).
 
-Legit reasons for being in recipt of a locked MacBook are basically when companies dispose of unwanted devices, the device is no longer useful to them, they don't want to spend time working on it, especially if they have confidence in that T2 chip preventing any new owners from being able to decrypt the data on the device, so they just throw them. **NB** a T2 locked device isn't necessarily the same as a MDM locked device, these processes can be independent of one another, but I am putting it here because there are occasions where you need to do both in order to rescue an abandonded Mac. 
+## How to Remove an MDM
 
-If your device is T2 locked, and I mean _NOT_ an Activation Lock (that baby is unlockable, except by iCloud owner) then you can still rescue the device, but you need another Mac to do it. 
+### Prerequisites ⚠️
+- **Device language must be set to English. It can be changed afterward.** (at least for _my_ script to work)
+- A fresh MacOS installation is **recommended** but not required.
 
-- You need to connect a USB-C cable to the **second port** on the **left** side of the locked MacBook
-- You need to download, install and open **Apple Configurator 2** from the App Store on your working Mac
-- Connect the other end of the USB-C cable to the working Mac (doesn't matter which port)
-- Hold the power butten on the locked MacBook for about 8 seconds and let go
-- The working Mac should say something like 'Allow Thunderbolt Accessory' or something like that, say yes
-- You will then see the other device in the centre of the Configurator screen, it will either look like a big padlock or say DFU
-- In Actions Menu (Apple COnfigurator on Working Mac) click on **Actions** and **Restore**
-- This might seem to take ages, or maybe it does just take ages, and you may not see much visual indication of anything on the Locked MacBook (in fact, expect that screeen to remain off the entire time). Do not disturb the process, else the chances of having a bricked laptop at the end of it are exponential.
-- Eventually process finishes and the Locked MacBook will reboot, you will likely see a folder with a question mark on the locked MacBook
-- This is not a bad thing... This means that the device is now unlocked and ready for recovery, it just means that the MacBook doesn't know what to do, that's because it no longer has an Operating System and will need a MacOS reinstall to move forward.
+### Steps:
+1. **Boot into Recovery Mode**.
+2. **Use Disk Utility** to **erase** the current disk.
+3. **Rename your new volume** (optional, but "Macintosh HD" is recommended).
+4. **Reinstall MacOS** (from Recovery Mode or an external USB installer).
 
-THIS IS WORKING DOCUMENT - WILL CONTINUE LATER
+Once installation is complete, the device will restart and present the setup wizard. One of the first steps is the network setup, so join the network and when you see the MDM Enrollment message, then  **DO NOT proceed past this step!** Instead:
+
+5. Turn off the device.
+6. Boot **back into Recovery Mode**:
+   - **Apple Silicon Macs:** Hold the power button.
+   - **Intel Macs:** Hold <kbd>CMD</kbd> + <kbd>R</kbd> during boot.
+7. Connect to Wi-Fi.
+8. Open **Safari** and navigate to [the script in my GitHub repo](https://github.com/rnddave/remove-mdm/blob/main/README.md).
+9. Copy the following command:
+
+    ```zsh
+    curl https://github.com/rnddave/remove-mdm/blob/main/mdm-cleaner.sh -o mdm-cleaner.sh && chmod +x ./mdm-cleaner.sh && ./mdm-cleaner.sh
+    ```
+
+10. Open **Terminal** (Utilities > Terminal).
+11. Paste the command (<kbd>CMD</kbd> + <kbd>V</kbd>) and press **Enter**.
+12. Select **1** to run the MDM bypass script.
+13. Press **Enter** to accept the default username (**Apple**).
+14. Press **Enter** to accept the default password (**12345**).
+15. Wait for the script to finish and reboot your Mac.
+
+### After Rebooting
+16. Log in with **Username:** Apple | **Password:** 12345.
+17. Skip setup steps (Apple ID, Siri, Touch ID, Location Services).
+18. Go to **System Settings > Users and Groups** and create your proper user account (probably a good idea to set yourself as an Admin).
+19. Log out of the temporary **Apple** account and log into your new account.
+20. If your new account is an admin, delete the temporary **Apple** account.
+
+## I Don't Want to Wipe My MacOS Installation—What Can I Do?
+
+This is **not guaranteed** to be trouble-free and depends on the age of your device and how your system administrator has configured it. If **Secure Boot** is enabled (which is common for Macs after 2017), you may need an admin password to access Recovery Mode.
+
+However, if you can access **Recovery Mode** without an admin password, you can try the following:
+
+1. Open **Terminal** (Utilities > Terminal).
+2. Type `cd /Volumes/` and then `ls` to list available volumes.
+3. Identify the correct system volume (e.g., "Macintosh HD").
+4. Run (where **$system_volume** is the name of your volume as per step 3):
+
+    ```shell
+    rm -rf /Volumes/"$system_volume"/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
+    rm -rf /Volumes/"$system_volume"/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
+    touch /Volumes/"$system_volume"/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
+    touch /Volumes/"$system_volume"/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+    ```
+
+5. Block MDM servers:
+
+    ```shell
+    echo "0.0.0.0 deviceenrollment.apple.com" >>/Volumes/"$system_volume"/etc/hosts
+    echo "0.0.0.0 mdmenrollment.apple.com" >>/Volumes/"$system_volume"/etc/hosts
+    echo "0.0.0.0 iprofiles.apple.com" >>/Volumes/"$system_volume"/etc/hosts
+    ```
+
+### Final Warning
+Tampering with MDM settings—especially on a work-issued device—could have **serious consequences**, including termination of employment. This guide is intended **only for IT professionals** troubleshooting company devices and **System Recyclers**.
+
+_Sometimes fixing things means breaking them a little first…_
